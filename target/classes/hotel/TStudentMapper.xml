@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzg.mapper.TStudentMapper">
+  <resultMap id="BaseResultMap" type="com.zzg.entity.TStudent">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="college" jdbcType="VARCHAR" property="college" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, name, sex, age, college, class_name
+  </sql>
+  <sql id="condition">
+  </sql>
+  <select id="select" parameterType="map" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from t_student
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="count" parameterType="map" resultType="java.lang.Integer">
+  	 select 
+    	count(1)
+    from t_student
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_student
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_student
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzg.entity.TStudent">
+    insert into t_student (sid, name, sex, 
+      age, college, class_name
+      )
+    values (#{sid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{age,jdbcType=INTEGER}, #{college,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzg.entity.TStudent">
+    insert into t_student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="college != null">
+        college,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzg.entity.TStudent">
+    update t_student
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzg.entity.TStudent">
+    update t_student
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      age = #{age,jdbcType=INTEGER},
+      college = #{college,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

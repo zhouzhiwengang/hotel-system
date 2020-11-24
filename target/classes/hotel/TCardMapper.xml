@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzg.mapper.TCardMapper">
+  <resultMap id="BaseResultMap" type="com.zzg.entity.TCard">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="star_time" jdbcType="DATE" property="starTime" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="student_sid" jdbcType="INTEGER" property="studentSid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, password, state, money, star_time, end_time, student_sid
+  </sql>
+  <sql id="condition">
+  </sql>
+  <select id="select" parameterType="map" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from t_card
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="count" parameterType="map" resultType="java.lang.Integer">
+  	 select 
+    	count(1)
+    from t_card
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_card
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_card
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzg.entity.TCard">
+    insert into t_card (sid, password, state, 
+      money, star_time, end_time, 
+      student_sid)
+    values (#{sid,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DECIMAL}, #{starTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
+      #{studentSid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzg.entity.TCard">
+    insert into t_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="starTime != null">
+        star_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="studentSid != null">
+        student_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="starTime != null">
+        #{starTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="studentSid != null">
+        #{studentSid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzg.entity.TCard">
+    update t_card
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="starTime != null">
+        star_time = #{starTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="studentSid != null">
+        student_sid = #{studentSid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzg.entity.TCard">
+    update t_card
+    set password = #{password,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      star_time = #{starTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      student_sid = #{studentSid,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

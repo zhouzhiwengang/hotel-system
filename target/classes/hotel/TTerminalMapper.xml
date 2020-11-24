@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzg.mapper.TTerminalMapper">
+  <resultMap id="BaseResultMap" type="com.zzg.entity.TTerminal">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="admin_sid" jdbcType="INTEGER" property="adminSid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, name, admin_sid
+  </sql>
+  <sql id="condition">
+  </sql>
+  <select id="select" parameterType="map" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from t_terminal
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="count" parameterType="map" resultType="java.lang.Integer">
+  	 select 
+    	count(1)
+    from t_terminal
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_terminal
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_terminal
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzg.entity.TTerminal">
+    insert into t_terminal (sid, name, admin_sid
+      )
+    values (#{sid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{adminSid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzg.entity.TTerminal">
+    insert into t_terminal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="adminSid != null">
+        admin_sid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSid != null">
+        #{adminSid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzg.entity.TTerminal">
+    update t_terminal
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSid != null">
+        admin_sid = #{adminSid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzg.entity.TTerminal">
+    update t_terminal
+    set name = #{name,jdbcType=VARCHAR},
+      admin_sid = #{adminSid,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzg.mapper.TConsumeMapper">
+  <resultMap id="BaseResultMap" type="com.zzg.entity.TConsume">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="consume_date" jdbcType="DATE" property="consumeDate" />
+    <result column="card_sid" jdbcType="INTEGER" property="cardSid" />
+    <result column="terminal_sid" jdbcType="INTEGER" property="terminalSid" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, money, consume_date, card_sid, terminal_sid, state
+  </sql>
+  <sql id="condition">
+  </sql>
+  <select id="select" parameterType="map" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from t_consume
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="count" parameterType="map" resultType="java.lang.Integer">
+  	 select 
+    	count(1)
+    from t_consume
+    where 1 = 1
+    <include refid="condition"></include>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_consume
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_consume
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzg.entity.TConsume">
+    insert into t_consume (sid, money, consume_date, 
+      card_sid, terminal_sid, state
+      )
+    values (#{sid,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, #{consumeDate,jdbcType=DATE}, 
+      #{cardSid,jdbcType=INTEGER}, #{terminalSid,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzg.entity.TConsume">
+    insert into t_consume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="consumeDate != null">
+        consume_date,
+      </if>
+      <if test="cardSid != null">
+        card_sid,
+      </if>
+      <if test="terminalSid != null">
+        terminal_sid,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="consumeDate != null">
+        #{consumeDate,jdbcType=DATE},
+      </if>
+      <if test="cardSid != null">
+        #{cardSid,jdbcType=INTEGER},
+      </if>
+      <if test="terminalSid != null">
+        #{terminalSid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzg.entity.TConsume">
+    update t_consume
+    <set>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="consumeDate != null">
+        consume_date = #{consumeDate,jdbcType=DATE},
+      </if>
+      <if test="cardSid != null">
+        card_sid = #{cardSid,jdbcType=INTEGER},
+      </if>
+      <if test="terminalSid != null">
+        terminal_sid = #{terminalSid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzg.entity.TConsume">
+    update t_consume
+    set money = #{money,jdbcType=DECIMAL},
+      consume_date = #{consumeDate,jdbcType=DATE},
+      card_sid = #{cardSid,jdbcType=INTEGER},
+      terminal_sid = #{terminalSid,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>
